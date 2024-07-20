@@ -2,7 +2,7 @@ open! Core
 open Hardcaml
 open Signal
 
-module Input = struct
+module I = struct
   type 'a t =
     { ui_in : 'a [@bits 8]
     ; uio_in : 'a [@bits 8]
@@ -13,7 +13,7 @@ module Input = struct
   [@@deriving hardcaml]
 end
 
-module Output = struct
+module O = struct
   type 'a t =
     { uo_out : 'a [@bits 8]
     ; uio_out : 'a [@bits 8]
@@ -22,10 +22,11 @@ module Output = struct
   [@@deriving hardcaml]
 end
 
-let create (i : _ Input.t) : _ Output.t =
-  { uo_out = i.ui_in +: i.uio_in; uio_out = zero 8; uio_oe = zero 8 }
+include Circuit.With_interface (I) (O)
+
+let stripes ({ ui_in = _; uio_in = _; ena = _; clk; rst_n } : _ I.t) : _ O.t =
+  let%tydi { uo_out } = Stripes.create { clk; rst_n } |> Vga_output.create in
+  { uo_out; uio_out = zero 8; uio_oe = zero 8 }
 ;;
 
-module Circuit = Circuit.With_interface (Input) (Output)
-
-let circuit = Circuit.create_exn ~name:"tt_um_matthewelse" create
+let circuit = create_exn ~name:"tt_um_matthewelse" stripes

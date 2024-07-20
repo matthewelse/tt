@@ -1,5 +1,6 @@
 (library
  (name tiny_tapeout)
- (libraries core hardcaml)
+ (libraries core hardcaml hardcaml_waveterm)
+ (inline_tests)
  (preprocess
   (pps ppx_jane ppx_hardcaml)))
