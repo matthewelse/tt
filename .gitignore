@@ -1,0 +1,42 @@
+.DS_Store
+.idea
+.vscode
+*.vcd
+runs
+tt_submission
+src/user_config.json
+src/config_merged.json
+test/sim_build
+test/__pycache__/
+test/results.xml
+test/gate_level_netlist.v
+
+*.annot
+*.cmo
+*.cma
+*.cmi
+*.a
+*.o
+*.cmx
+*.cmxs
+*.cmxa
+
+# ocamlbuild working directory
+_build/
+
+# ocamlbuild targets
+*.byte
+*.native
+
+# oasis generated files
+setup.data
+setup.log
+
+# Merlin configuring file for Vim and Emacs
+.merlin
+
+# Dune generated files
+*.install
+
+# Local OPAM switch
+_opam/

@@ -1,0 +1,5 @@
+(library
+ (name tiny_tapeout)
+ (libraries core hardcaml)
+ (preprocess
+  (pps ppx_jane ppx_hardcaml)))

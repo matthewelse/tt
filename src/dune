@@ -1,0 +1,9 @@
+(rule
+ (alias DEFAULT)
+ (deps %{workspace_root}/bin/generate.exe)
+ (target project.v)
+ (mode promote)
+ (action
+  (with-stdout-to
+   %{target}
+   (run %{deps}))))
